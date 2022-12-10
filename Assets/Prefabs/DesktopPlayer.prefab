@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 8582908938546813855}
   - component: {fileID: 6294640737361416656}
   m_Layer: 0
-  m_Name: Player - Desktop
+  m_Name: DesktopPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
