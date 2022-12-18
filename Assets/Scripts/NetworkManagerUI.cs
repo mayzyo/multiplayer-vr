@@ -34,14 +34,14 @@ public class NetworkManagerUI : MonoBehaviour
     private void initialiseButtonSet(Button hostBtn, Button clientBtn, int id) {
         hostBtn.onClick.AddListener(() =>
         {
+            PlayerSpawner.playerType = id;
             NetworkManager.Singleton.StartHost();
-            playerSpawner.SpawnPlayerServerRpc();
         });
 
         clientBtn.onClick.AddListener(() =>
         {
+            PlayerSpawner.playerType = id;
             NetworkManager.Singleton.StartClient();
-            playerSpawner.SpawnPlayerServerRpc();
         });
     }
 }

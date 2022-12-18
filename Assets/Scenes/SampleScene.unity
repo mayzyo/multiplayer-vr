@@ -972,7 +972,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vr: {fileID: 8616685848737228372, guid: 25dac963af502e2409b480a042b66866, type: 3}
   oculus: {fileID: 8616685848737228372, guid: 9668941c08878bf49abbf664530cfe5b, type: 3}
-  desktop: {fileID: 5811475953652300082, guid: f3347e906ace9fb45be1314e344490ea, type: 3}
+  desktop: {fileID: 8616685848737228372, guid: addd25f3a126d474b86854aaed9e0b34, type: 3}
+  body: {fileID: 8177229117597317611, guid: 11dea917bd84e0549b694cb70507d0a1, type: 3}
 --- !u!4 &886866422
 Transform:
   m_ObjectHideFlags: 0
@@ -981,7 +982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886866419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16052753, y: -0.046389177, z: -0.06141007}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2015,9 +2016,9 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 167.179.186.161
+    Address: 127.0.0.1
     Port: 7777
-    ServerListenAddress: 0.0.0.0
+    ServerListenAddress: 
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0
@@ -2042,22 +2043,7 @@ MonoBehaviour:
     PlayerPrefab: {fileID: 0}
     NetworkPrefabs:
     - Override: 0
-      Prefab: {fileID: 5811475953652300082, guid: 3f4ece51293627f4fbb19b8f63f9edcb, type: 3}
-      SourcePrefabToOverride: {fileID: 5811475953652300082, guid: 3f4ece51293627f4fbb19b8f63f9edcb, type: 3}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
-      Prefab: {fileID: 8616685848737228372, guid: 9668941c08878bf49abbf664530cfe5b, type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
-      Prefab: {fileID: 8616685848737228372, guid: 25dac963af502e2409b480a042b66866, type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
-      Prefab: {fileID: 5811475953652300082, guid: f3347e906ace9fb45be1314e344490ea, type: 3}
+      Prefab: {fileID: 8177229117597317611, guid: 11dea917bd84e0549b694cb70507d0a1, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
