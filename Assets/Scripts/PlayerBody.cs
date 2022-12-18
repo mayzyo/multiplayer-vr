@@ -14,6 +14,8 @@ public class PlayerBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(parentObject.position.x, 0.5f, parentObject.position.z);
+        if(parentObject) {
+            this.transform.position = new Vector3(parentObject.position.x, 0.5f, parentObject.position.z);
+        }
     }
 }
