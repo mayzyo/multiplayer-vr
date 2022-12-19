@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class Spawnable : NetworkBehaviour
 {   
-    void awake() {
-        Debug.Log("ReADY");
+    void Awake() {
+        PlayerSpawner.Instance.isVrLeftHandReady = true;
     }
 }

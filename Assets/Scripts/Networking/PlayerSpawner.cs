@@ -10,6 +10,7 @@ public class PlayerSpawner : NetworkBehaviour
     [SerializeField] private GameObject desktop;
     [SerializeField] private GameObject body;
     [SerializeField] private GameObject vrLeftHand;
+    public bool isVrLeftHandReady = false;
 
     public static int playerType = 0;
     private GameObject go;
@@ -99,7 +100,7 @@ public class PlayerSpawner : NetworkBehaviour
         var clientId = serverRpcParams.Receive.SenderClientId;
 
         NetworkObject networkObject = Instantiate(vrLeftHand).GetComponent<NetworkObject>();
-        networkObject.Spawn(true);
-        Debug.Log(networkObject);
+        networkObject.SpawnWithOwnership(clientId, true);
+        Debug.Log(clientId);
     }
 }

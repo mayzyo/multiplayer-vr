@@ -852,7 +852,7 @@ MonoBehaviour:
   oculus: {fileID: 8616685848737228372, guid: 9668941c08878bf49abbf664530cfe5b, type: 3}
   desktop: {fileID: 8616685848737228372, guid: addd25f3a126d474b86854aaed9e0b34, type: 3}
   body: {fileID: 8398543312737819655, guid: e7098b3633668cd4fb16ce34460fe63f, type: 3}
-  vrLeftHand: {fileID: 1000013348574242, guid: 7426a224be1d3364babfb0a4a036b442, type: 3}
+  vrLeftHand: {fileID: 3581697613583439329, guid: fe3640b01acbd8a45a706020ce77e1c4, type: 3}
 --- !u!4 &886866422
 Transform:
   m_ObjectHideFlags: 0
@@ -1538,7 +1538,7 @@ MonoBehaviour:
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 1000013348574242, guid: 7426a224be1d3364babfb0a4a036b442, type: 3}
+      Prefab: {fileID: 3581697613583439329, guid: fe3640b01acbd8a45a706020ce77e1c4, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}

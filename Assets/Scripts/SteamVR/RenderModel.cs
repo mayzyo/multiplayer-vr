@@ -13,7 +13,7 @@ namespace Valve.VR.InteractionSystem
         protected GameObject handInstance;
         protected Renderer[] handRenderers;
         public bool displayHandByDefault = true;
-        protected SteamVR_Behaviour_Skeleton handSkeleton;
+        protected Behaviour_Skeleton handSkeleton;
         protected Animator handAnimator;
 
         protected string animatorParameterStateName = "AnimationState";
@@ -34,58 +34,10 @@ namespace Valve.VR.InteractionSystem
 
         protected SteamVR_Input_Sources inputSource;
 
-        // [ServerRpc(RequireOwnership=false)] //server owns this object but client can request a spawn
-        // public void SpawnServerRpc(ServerRpcParams serverRpcParams = default) {
-        //     if (!IsServer) return;
-
-        //     var clientId = serverRpcParams.Receive.SenderClientId;
-
-        //     NetworkObject networkObject = Instantiate(handPrefab).GetComponent<NetworkObject>();
-        //     networkObject.Spawn(true);
-
-        //     ClientRpcParams clientRpcParams = new ClientRpcParams
-        //     {
-        //         Send = new ClientRpcSendParams
-        //         {
-        //             TargetClientIds = new ulong[]{clientId}
-        //         }
-        //     };
-
-        //     AddClientRpc(clientRpcParams);
-        // }
-
-        // [ClientRpc]
-        // private void AddClientRpc(ClientRpcParams clientRpcParams = default)
-        // {
-        //     handInstance = GameObject.FindGameObjectWithTag("vr_left");
-        //     Debug.Log(handInstance);
-        //     // handInstance = GameObject.Instantiate(handPrefab);
-        //     handInstance.transform.parent = this.transform;
-        //     handInstance.transform.localPosition = Vector3.zero;
-        //     handInstance.transform.localRotation = Quaternion.identity;
-        //     handInstance.transform.localScale = handPrefab.transform.localScale;
-        //     handSkeleton = handInstance.GetComponent<SteamVR_Behaviour_Skeleton>();
-        //     handSkeleton.origin = Player.instance.trackingOriginTransform;
-        //     handSkeleton.updatePose = false;
-        //     handSkeleton.skeletonAction.onActiveChange += OnSkeletonActiveChange;
-
-        //     handRenderers = handInstance.GetComponentsInChildren<Renderer>();
-        //     if (displayHandByDefault == false)
-        //         SetHandVisibility(false);
-
-        //     handAnimator = handInstance.GetComponentInChildren<Animator>();
-
-        //     if (handSkeleton.skeletonAction.activeBinding == false && handSkeleton.fallbackPoser == null)
-        //     {
-        //         Debug.LogWarning("Skeleton action: " + handSkeleton.skeletonAction.GetPath() + " is not bound. Your controller may not support SteamVR Skeleton Input. " +
-        //             "Please add a fallback skeleton poser to your skeleton if you want hands to be visible");
-        //         DestroyHand();
-        //     }
-        // }
+        private Transform slim_l;
 
         protected void Awake()
         {
-            Debug.Log("awake");
             renderModelLoadedAction = SteamVR_Events.RenderModelLoadedAction(OnRenderModelLoaded);
 
             InitializeHand();
@@ -93,12 +45,60 @@ namespace Valve.VR.InteractionSystem
             InitializeController();
         }
 
+        protected void Update() {
+            if(handInstance != null) {
+                var hand = handInstance.GetComponent<Transform>();
+                slim_l.transform.position = new Vector3(hand.position.x, hand.position.y, hand.position.z);
+                slim_l.transform.rotation = new Quaternion(hand.rotation.x, hand.rotation.y, hand.rotation.z, hand.rotation.w);
+            }
+
+            if(PlayerSpawner.Instance.isVrLeftHandReady == true) {
+                PlayerSpawner.Instance.isVrLeftHandReady = false;
+                Debug.Log("here");
+                var tagged = GameObject.FindGameObjectsWithTag("vr_left");
+                foreach(var t in tagged) {
+                    NetworkObject netObj = t.GetComponent<NetworkObject>();
+
+                    if(netObj.IsOwner == true) {
+                        slim_l = netObj.GetComponent<Transform>();
+                    }
+                }
+
+                Transform slim_l_root = slim_l.GetChild(0);
+                handInstance = GameObject.Instantiate(handPrefab);
+                handInstance.transform.parent = this.transform;
+                handInstance.transform.localPosition = Vector3.zero;
+                handInstance.transform.localRotation = Quaternion.identity;
+                handInstance.transform.localScale = handPrefab.transform.localScale;
+                handSkeleton = handInstance.GetComponent<Behaviour_Skeleton>();
+                handSkeleton.skeletonRoot = slim_l_root;
+                Debug.Log(handSkeleton.skeletonRoot);
+                handSkeleton.initialise();
+                handSkeleton.origin = Player.instance.trackingOriginTransform;
+                handSkeleton.updatePose = false;
+                handSkeleton.skeletonAction.onActiveChange += OnSkeletonActiveChange;
+
+                handRenderers = handInstance.GetComponentsInChildren<Renderer>();
+                if (displayHandByDefault == false)
+                    SetHandVisibility(false);
+
+                handAnimator = handInstance.GetComponentInChildren<Animator>();
+
+                if (handSkeleton.skeletonAction.activeBinding == false && handSkeleton.fallbackPoser == null)
+                {
+                    Debug.LogWarning("Skeleton action: " + handSkeleton.skeletonAction.GetPath() + " is not bound. Your controller may not support SteamVR Skeleton Input. " +
+                        "Please add a fallback skeleton poser to your skeleton if you want hands to be visible");
+                    DestroyHand();
+                }
+            }
+        }
+
         protected void InitializeHand()
         {
             if (handPrefab != null)
             {
+                
                 PlayerSpawner.Instance.CallSpawn();
-                // SpawnServerRpc();
             }
         }
 
