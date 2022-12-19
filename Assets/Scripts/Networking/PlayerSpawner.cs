@@ -9,6 +9,7 @@ public class PlayerSpawner : NetworkBehaviour
     [SerializeField] private GameObject oculus;
     [SerializeField] private GameObject desktop;
     [SerializeField] private GameObject body;
+    [SerializeField] private GameObject vrLeftHand;
 
     public static int playerType = 0;
     private GameObject go;
@@ -34,13 +35,13 @@ public class PlayerSpawner : NetworkBehaviour
     {
         if(playerType == 0) {
             go = Instantiate(vr, Vector3.zero, Quaternion.identity);
-            SpawnPlayerServerRpc();
+            // SpawnPlayerServerRpc();
         } else if(playerType == 1) {
             go = Instantiate(vr, Vector3.zero, Quaternion.identity);
-            SpawnPlayerServerRpc();
+            // SpawnPlayerServerRpc();
         } else {
             go = Instantiate(desktop, Vector3.zero, Quaternion.identity);
-            SpawnPlayerServerRpc();
+            // SpawnPlayerServerRpc();
         }
     }
 
@@ -85,10 +86,8 @@ public class PlayerSpawner : NetworkBehaviour
         }
     }
 
-    private GameObject temp;
-
-    public void CallSpawn(GameObject go) {
-        this.temp = go;
+    public void CallSpawn() {
+        Debug.Log("Call spawn");
         SpawnServerRpc();
     }
 
@@ -99,7 +98,7 @@ public class PlayerSpawner : NetworkBehaviour
 
         var clientId = serverRpcParams.Receive.SenderClientId;
 
-        NetworkObject networkObject = Instantiate(temp).GetComponent<NetworkObject>();
+        NetworkObject networkObject = Instantiate(vrLeftHand).GetComponent<NetworkObject>();
         networkObject.Spawn(true);
         Debug.Log(networkObject);
     }

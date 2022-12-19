@@ -97,7 +97,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (handPrefab != null)
             {
-                PlayerSpawner.Instance.CallSpawn(handPrefab);
+                PlayerSpawner.Instance.CallSpawn();
                 // SpawnServerRpc();
             }
         }
