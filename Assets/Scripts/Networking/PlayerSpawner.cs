@@ -13,7 +13,23 @@ public class PlayerSpawner : NetworkBehaviour
     public static int playerType = 0;
     private GameObject go;
 
-    
+    public static PlayerSpawner Instance { get; private set; }
+
+    private void Awake() 
+    { 
+        // If there is an instance, and it's not me, delete myself.
+        
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
+
+
     public override void OnNetworkSpawn()
     {
         if(playerType == 0) {
@@ -67,5 +83,24 @@ public class PlayerSpawner : NetworkBehaviour
             GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
             player.parentObject = camera.GetComponent<Transform>();
         }
+    }
+
+    private GameObject temp;
+
+    public void CallSpawn(GameObject go) {
+        this.temp = go;
+        SpawnServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership=false)] //server owns this object but client can request a spawn
+    public void SpawnServerRpc(ServerRpcParams serverRpcParams = default) {
+        Debug.Log("Spawn server rpc");
+        if (!IsServer) return;
+
+        var clientId = serverRpcParams.Receive.SenderClientId;
+
+        NetworkObject networkObject = Instantiate(temp).GetComponent<NetworkObject>();
+        networkObject.Spawn(true);
+        Debug.Log(networkObject);
     }
 }

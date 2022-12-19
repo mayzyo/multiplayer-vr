@@ -743,7 +743,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857338809}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &857338811
 Camera:
   m_ObjectHideFlags: 0
@@ -1533,6 +1533,11 @@ MonoBehaviour:
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
       Prefab: {fileID: 8398543312737819655, guid: e7098b3633668cd4fb16ce34460fe63f, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 1000013348574242, guid: 7426a224be1d3364babfb0a4a036b442, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
