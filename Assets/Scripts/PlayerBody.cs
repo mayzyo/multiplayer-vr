@@ -29,11 +29,11 @@ public class PlayerBody : NetworkBehaviour
 
         if (IsLocalPlayer)
         {
+            head.SetActive(false);
+            leftHand.SetActive(false);
+            rightHand.SetActive(false);
             if (!isVr)
             {
-                head.SetActive(false);
-                leftHand.SetActive(false);
-                rightHand.SetActive(false);
                 body.SetActive(true);
                 if (parentObject)
                 {
