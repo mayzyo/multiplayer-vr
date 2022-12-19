@@ -53,16 +53,17 @@ public class PlayerSpawner : NetworkBehaviour
     {
         // Run your client-side logic here!!
         if(playerType == 0) {
-            PlayerBody player = NetworkManager.LocalClient.PlayerObject.GetComponent<PlayerBody>();
-            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-            player.parentObject = camera.GetComponent<Transform>();
+            //PlayerBody player = NetworkManager.LocalClient.PlayerObject.GetComponent<PlayerBody>();
+            //GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+            //player.parentObject = camera.GetComponent<Transform>();
         } else if(playerType == 1) {
             // Oculus logic goes here. Just Tag the object that actually moves with "MainCamera"
-            PlayerBody player = NetworkManager.LocalClient.PlayerObject.GetComponent<PlayerBody>();
-            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-            player.parentObject = camera.GetComponent<Transform>();
+            //PlayerBody player = NetworkManager.LocalClient.PlayerObject.GetComponent<PlayerBody>();
+            //GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+            //player.parentObject = camera.GetComponent<Transform>();
         } else {
             PlayerBody player = NetworkManager.LocalClient.PlayerObject.GetComponent<PlayerBody>();
+            player.isVr = false;
             GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
             player.parentObject = camera.GetComponent<Transform>();
         }

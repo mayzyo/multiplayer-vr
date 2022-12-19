@@ -11,9 +11,6 @@ public class NetworkManagerUI : MonoBehaviour
     [SerializeField] private Button hostVRBtn;
     [SerializeField] private Button clientVRBtn;
 
-    [SerializeField] private Button hostOculusBtn;
-    [SerializeField] private Button clientOculusBtn;
-
     [SerializeField] private Button hostDesktopBtn;
     [SerializeField] private Button clientDesktopBtn;
 
@@ -27,7 +24,6 @@ public class NetworkManagerUI : MonoBehaviour
         });
 
         initialiseButtonSet(hostVRBtn, clientVRBtn, 0);
-        initialiseButtonSet(hostOculusBtn, clientOculusBtn, 1);
         initialiseButtonSet(hostDesktopBtn, clientDesktopBtn, 2);
     }
 
